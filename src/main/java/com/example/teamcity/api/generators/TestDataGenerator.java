@@ -11,32 +11,6 @@ import java.util.Arrays;
 
 public class TestDataGenerator {
     /*
-    * Update method according to adding new two parameters of User as email and roles and adding two new classes as Roles and Role
-    * old variant - we generated User with username/password as admin/admin
-    * new variant - we generate User with random username, password and email. But set roleId as "SYSTEM_ADMIN"
-    * */
-//    public TestData generate() {
-//        var user = User.builder()
-//                .username("admin")
-//                .password("admin")
-//                .build();
-//        var project = NewProjectDescription
-//                .builder()
-//                .parentProject(Project.builder()
-//                        .locator("_Root")
-//                        .build())
-//                .name(RandomData.getString())
-//                .id(RandomData.getString())
-//                .copyAllAssociatedSettings(true)
-//                .build();
-//        return TestData.builder()
-//                .user(user)
-//                .project(project)
-//                .build();
-//    }
-
-
-    /*
     * By default we set roleId of User as "SYSTEM_ADMIN" which we can over set to another roleId where it is needed
     * And make all methods as static
     * */
