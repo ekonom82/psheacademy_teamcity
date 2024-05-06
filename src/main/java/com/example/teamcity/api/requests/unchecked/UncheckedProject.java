@@ -20,7 +20,6 @@ public class UncheckedProject extends Request implements CrudInterface {
     * Поэтому нужно параметризировать не User, а RequestSpecification -> у каждого запроса (реквеста) должна быть своя спецификация,
     * котороя содержит всю информацию, что у нас лежит в Хедерах запроса
     * */
-//    private User user;
 
     public UncheckedProject(RequestSpecification spec) {
         super(spec);
@@ -30,7 +29,6 @@ public class UncheckedProject extends Request implements CrudInterface {
     public Response create(Object obj) {
         return RestAssured
                 .given()
-//                .spec(Specifications.getSpec().authSpec(user))
                 .spec(spec)
                 .body(obj)
                 .post(PROJECT_ENDPOINT);
@@ -49,7 +47,6 @@ public class UncheckedProject extends Request implements CrudInterface {
     @Override
     public Response delete(String id) {
         return given()
-//                .spec(Specifications.getSpec().authSpec(user))
                 .spec(spec)
                 .delete(PROJECT_ENDPOINT + "/id:" + id);
     }
