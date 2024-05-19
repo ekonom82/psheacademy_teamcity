@@ -1,6 +1,7 @@
 package com.example.teamcity.ui;
 
 import com.codeborne.selenide.Configuration;
+import com.example.teamcity.api.BaseTest;
 import com.example.teamcity.api.config.Config;
 import org.testng.annotations.BeforeSuite;
 
@@ -9,7 +10,7 @@ import org.testng.annotations.BeforeSuite;
 * где сам браузер лежит и так далее. В этом поможет библиотека selenide - это обертка над selenium, которая позволяет более удобно делать
 * те же самые проверки.
 * */
-public class BaseUiTest {
+public class BaseUiTest extends BaseTest {
 
     /*
     * настройка конфигураций перед всеми тестами (в TestNG тесты запускаются по СЬЮТАМ): создаем настройку нашего Selenide, через его класс Configuration
