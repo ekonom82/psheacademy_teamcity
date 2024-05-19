@@ -3,6 +3,10 @@ package com.example.teamcity.ui;
 import com.codeborne.selenide.Configuration;
 import com.example.teamcity.api.BaseTest;
 import com.example.teamcity.api.config.Config;
+import com.example.teamcity.api.models.User;
+import com.example.teamcity.api.requests.checked.CheckedUser;
+import com.example.teamcity.api.spec.Specifications;
+import com.example.teamcity.ui.pages.LoginPage;
 import org.testng.annotations.BeforeSuite;
 
 /*
@@ -30,5 +34,11 @@ public class BaseUiTest extends BaseTest {
         Configuration.downloadsFolder ="target/downloads";
 
         BrowserSettings.setup(Config.getProperty("browser"));
+    }
+
+    // так как данная функциональность по логированию авторизированного юзера будет использоваться очень часто - вынесли в отдельный метод
+    public void loginAsUser(User user) {
+        new CheckedUser(Specifications.getSpec().superUserSpec()).create(user);
+        new LoginPage().open().login(user);
     }
 }
