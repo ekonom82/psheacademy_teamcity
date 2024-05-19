@@ -32,6 +32,7 @@ public class BrowserSettings {
         Configuration.browserCapabilities.setCapability("selenoid:options", getSelenoidOptions());
     }
 
+    // добавляем доступность логов и UI во время отладки в браузере (в Selenide UI)
     private static Map<String, Boolean> getSelenoidOptions() {
         Map<String, Boolean> options = new HashMap<>();
         options.put("enableVNC", true);
