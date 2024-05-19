@@ -34,8 +34,8 @@ public class BaseTest {
 
     @BeforeMethod
     public void beforeTest() {
-        softy = new SoftAssertions();
         testDataStorage = TestDataStorage.getStorage();
+        softy = new SoftAssertions();
     }
 
     @AfterMethod
