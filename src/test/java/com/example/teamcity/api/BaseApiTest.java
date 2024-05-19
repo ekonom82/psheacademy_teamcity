@@ -1,11 +1,6 @@
 package com.example.teamcity.api;
 
 import com.example.teamcity.api.generators.TestDataStorage;
-import com.example.teamcity.api.requests.CheckedRequests;
-import com.example.teamcity.api.requests.UncheckedRequests;
-import com.example.teamcity.api.spec.Specifications;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
 public class BaseApiTest extends BaseTest{
@@ -27,23 +22,29 @@ public class BaseApiTest extends BaseTest{
 
     public TestDataStorage testDataStorage;
 
-    // Due to we always have access to Supper User and always can work with it
-    // We create two next objects
-    public CheckedRequests checkedWithSuperUser
-            = new CheckedRequests(Specifications.getSpec().superUserSpec());
+    /*
+    * Due to we always have access to Supper User and always can work with it
+    * We create two next objects
+    * */
 
-    public UncheckedRequests uncheckedWithSuperUser
-            = new UncheckedRequests(Specifications.getSpec().superUserSpec());
-
-    @BeforeMethod
-    public void setupTest() {
-        testDataStorage = TestDataStorage.getStorage();
-    }
-
-    @AfterMethod
-    public void cleanTest() {
-        testDataStorage.delete();
-    }
+    /*
+    * !!! dou to we created UI flow and we need access to all these methods we replace them to BaseTest
+    * */
+//    public CheckedRequests checkedWithSuperUser
+//            = new CheckedRequests(Specifications.getSpec().superUserSpec());
+//
+//    public UncheckedRequests uncheckedWithSuperUser
+//            = new UncheckedRequests(Specifications.getSpec().superUserSpec());
+//
+//    @BeforeMethod
+//    public void setupTest() {
+//        testDataStorage = TestDataStorage.getStorage();
+//    }
+//
+//    @AfterMethod
+//    public void cleanTest() {
+//        testDataStorage.delete();
+//    }
 
     @BeforeTest
     public void settingPermission() {
