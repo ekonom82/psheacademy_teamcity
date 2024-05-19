@@ -20,5 +20,15 @@ public class BaseUiTest extends BaseTest {
         Configuration.browser = "firefox";
         Configuration.baseUrl = "http://" + Config.getProperty("host");
         Configuration.remote = Config.getProperty("remote");
+
+        /*
+        * все следующие Настройка для отображения UI при отладке в Selenide UI
+        * */
+        // папка для репортов
+        Configuration.reportsFolder = "target/surefire-reports";
+        // папка для downloads
+        Configuration.downloadsFolder ="target/downloads";
+
+        BrowserSettings.setup(Config.getProperty("browser"));
     }
 }
