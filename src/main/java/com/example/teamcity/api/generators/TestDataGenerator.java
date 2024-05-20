@@ -1,5 +1,6 @@
 package com.example.teamcity.api.generators;
 
+import com.example.teamcity.api.models.BuildConfig;
 import com.example.teamcity.api.models.BuildType;
 import com.example.teamcity.api.models.NewProjectDescription;
 import com.example.teamcity.api.models.Project;
@@ -43,10 +44,17 @@ public class TestDataGenerator {
                 .project(project)
                 .build();
 
+        var buildConfig = BuildConfig.builder()
+                .nameBuildStep(RandomData.getString())
+                .customScript("echo 'Hello World!'")
+                .typeBuildConfigRunner("Command Line")
+                .build();
+
         return TestData.builder()
                 .user(user)
                 .project(project)
                 .buildType(buildType)
+                .buildConfig(buildConfig)
                 .build();
     }
 
