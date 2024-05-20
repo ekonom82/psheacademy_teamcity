@@ -1,6 +1,7 @@
 package com.example.teamcity.ui;
 
 import com.codeborne.selenide.Condition;
+import com.example.teamcity.api.config.Config;
 import com.example.teamcity.ui.pages.favorites.ProjectsPage;
 import com.example.teamcity.ui.pages.admin.CreateNewProject;
 import org.testng.annotations.Test;
@@ -10,7 +11,7 @@ public class CreateNewProjectTest extends BaseUiTest {
     public void authorizedUserShouldBeAbleCreateNewProject() {
         var testData = testDataStorage.addTestData();
         // link to your repository necessary to fill textfield during creation new project
-        var url = "https://github.com/ekonom82/psheacademy_teamcity";
+        var url = Config.getProperty("urlRepo");
 
         // данная функциональность будет использоваться постоянно, поэтому ее вынесли в метод loginAsUser() класса BaseUiTest
 //        new LoginPage().open().login(testData.getUser());
@@ -29,5 +30,22 @@ public class CreateNewProjectTest extends BaseUiTest {
                 .getSubprojects()
                 .stream().reduce((first, second) -> second).get()
                 .getHeader().shouldHave(Condition.text(testData.getProject().getName()));
+    }
+
+    @Test
+    public void authorizedUserShouldNotBeAbleCreateNewProjectWithExistingName() {
+        var testData = testDataStorage.addTestData();
+        var url = Config.getProperty("urlRepo");
+
+        loginAsUser(testData.getUser());
+
+        new CreateNewProject()
+                .createProject(testData.getProject().getParentProject().getLocator(),
+                        url, testData.getProject().getName(), testData.getBuildType().getName());
+        new CreateNewProject()
+                .createProject(testData.getProject().getParentProject().getLocator(),
+                        url, testData.getProject().getName(), testData.getBuildType().getName());
+
+        new CreateNewProject().getErrorProjectNameText().shouldBe(Condition.visible);
     }
 }
