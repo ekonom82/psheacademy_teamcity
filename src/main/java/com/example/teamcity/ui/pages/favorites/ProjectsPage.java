@@ -2,11 +2,14 @@ package com.example.teamcity.ui.pages.favorites;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import com.example.teamcity.ui.Selectors;
 import com.example.teamcity.ui.elements.ProjectElement;
+import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selenide.element;
 import static com.codeborne.selenide.Selenide.elements;
 
 /*
@@ -15,6 +18,8 @@ import static com.codeborne.selenide.Selenide.elements;
 public class ProjectsPage extends FavoritesPage {
     // полный адрес страницы http://localhost:8111/favorite/projects?mode=builds
     private static final String FAVORITE_PROJECTS_URL = "/favorite/projects";
+
+    private final SelenideElement agentsMenuButton = element(By.xpath("//*[@href='/agents']"));
 
     // список наших проектов, что находятся на странице Projects (Favourite Projects), и имеют общий атрибут: class=Subproject__container--WE
     // будем данный список вэбэлементов трансформировать в список объектов в методе generatePageElements класса Page
@@ -29,5 +34,10 @@ public class ProjectsPage extends FavoritesPage {
     public List<ProjectElement> getSubprojects() {
 //        return generatePageElements(subprojects);
         return generatePageElements(subprojects, ProjectElement::new);
+    }
+
+    public ProjectsPage clickAgentsMenuButton() {
+        agentsMenuButton.click();
+        return this;
     }
 }
