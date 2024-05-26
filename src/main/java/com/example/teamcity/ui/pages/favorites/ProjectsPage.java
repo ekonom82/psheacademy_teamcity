@@ -36,8 +36,7 @@ public class ProjectsPage extends FavoritesPage {
         return generatePageElements(subprojects, ProjectElement::new);
     }
 
-    public ProjectsPage clickAgentsMenuButton() {
+    public void clickAgentsMenuButton() {
         agentsMenuButton.click();
-        return this;
     }
 }
