@@ -10,7 +10,8 @@ import com.example.teamcity.ui.pages.admin.SelectBuildConfigRunnerTypePage;
 import org.testng.annotations.Test;
 
 public class CreateNewBuildConfigTest extends BaseUiTest {
-    @Test
+
+    @Test(groups ={"ui", "smoke", "regression"})
     public void authorizedUserShouldBeAbleCreateNewBuildConfig() {
         var testData = testDataStorage.addTestData();
         var url = Config.getProperty("urlRepo");

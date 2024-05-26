@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class BuildConfigurationTest extends BaseApiTest{
 
-    @Test
+    @Test(groups ={"api", "smoke", "regression"})
     public void buildconfigurationTest(){
         /*
          * refactoring according changes related with replacement testData with TestDataStorage in BaseApiTest
