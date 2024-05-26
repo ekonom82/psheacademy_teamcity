@@ -104,8 +104,8 @@ docker run -d--name $selenoid_ui_container_name                                 
 echo "Setup teamcity server"
 
 # run test method - startUpTest from test class - SetupTest
-# in this tes method we make all necessary preparation activities when TeamCity project was upped
-mvn clean test -Dtest=SetupTest#startUpTest
+# in this tes method we make all necessary preparation activities when TeamCity project was up
+mvn clean test -Dtest=SetupFirstStartTest#setupTeamCityServerTest
 
 ################################
 echo "Parse superuser token"
