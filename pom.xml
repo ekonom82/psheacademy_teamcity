@@ -106,6 +106,8 @@
                         <!-- Specify the path to your XML file here -->
                         <suiteXmlFile>testng-suites/api-suite.xml</suiteXmlFile>
                         <suiteXmlFile>testng-suites/ui-suite.xml</suiteXmlFile>
+                        <suiteXmlFile>testng-suites/api-regression-suit.xml</suiteXmlFile>
+                        <suiteXmlFile>testng-suites/ui-regression-suit.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
                 <dependencies>
