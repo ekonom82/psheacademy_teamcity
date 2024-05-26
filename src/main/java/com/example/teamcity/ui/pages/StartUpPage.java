@@ -22,7 +22,7 @@ public class StartUpPage extends Page {
         return this;
     }
 
-    public StartUpPage setUpTeamCityServer() {
+    public void setUpTeamCityServer() {
         waitUntilPageIsLoaded();
         proceedButton.click();
         waitUntilPageIsLoaded();
@@ -32,6 +32,5 @@ public class StartUpPage extends Page {
         acceptLicenseCheckBox.scrollTo();
         acceptLicenseCheckBox.click();
         continueButton.click();
-        return this;
     }
 }
