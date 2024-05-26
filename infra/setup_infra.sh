@@ -103,8 +103,8 @@ docker run -d--name $selenoid_ui_container_name                                 
 ################################
 echo "Setup teamcity server"
 
-# run test method - startUpTest from test class - SetupTest
-# in this tes method we make all necessary preparation activities when TeamCity project was up
+# run test method - setupTeamCityServerTest from test class - SetupFirstStartTest
+# in this test method we make all necessary preparation activities when TeamCity project was up
 mvn clean test -Dtest=SetupFirstStartTest#setupTeamCityServerTest
 
 ################################
@@ -115,13 +115,35 @@ superuser_token=$(grep -o 'Super user authentication token: [0-9]*' $teamcity_te
 echo "Super user token: $superuser_token"
 
 ################################
-echo "Run system tests"
+echo "Setting config.properties"
 
 # we set resources/config.properties in our project with data which we got in previous steps in this file
 # we create a settings like text split every new variaples with character of new string "\n" and then save it in resources/config.properties
 echo "host=$ip:8111\nsuperUserToken=$superuser_token\nremote=http://$ip:4444/wd/hub\nbrowser=firefox" > $teamcity_tests_directory/src/main/resources/config.properties
 # show our created resources/config.properties with data
 cat $teamcity_tests_directory/src/main/resources/config.properties
+
+################################
+echo "Start teamcity agent"
+
+cd .. && cd $teamcity_agent_workdir
+
+# run teamcity_agent_container_name with url by $ip and on 8111 port
+docker run -e SERVER_URL="http://$ip:8111" -u 0 -d --name $teamcity_agent_container_name \
+          -v $(pwd)/tmp/teamcity_agent/conf:/data/teamcity_agent/conf \
+          jetbrains/teamcity-agent:2023.11.1
+
+echo "Teamcity agent is running..."
+
+################################
+echo "Setup teamcity agent"
+
+# run test method - setupTeamCityAgentTest from test class - SetupFirstStartTest
+# in this test method we authorize before added unauthorized agent
+mvn clean test -Dtest=SetupFirstStartTest#setupTeamCityAgentTest
+
+################################
+echo "Run system tests"
 
 echo "Run API tests"
 # we create testng-suites directory in the root dir of project where added xml-files which describe our suits of test
