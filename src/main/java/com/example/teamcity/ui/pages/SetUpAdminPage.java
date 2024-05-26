@@ -23,5 +23,4 @@ public class SetUpAdminPage extends Page {
     public void clickLoginAsSuperUserLink() {
         loginAsSuperUserLink.click();
     }
-
 }
