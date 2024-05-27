@@ -14,7 +14,8 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 public class RolesTest extends BaseApiTest{
-    @Test
+
+    @Test(groups ={"api", "smoke", "regression"})
     public void unauthorizedUserShouldNotHaveRightToCreateProject() {
         /*
         * In first method we check or will be created project by unauth User
@@ -56,7 +57,7 @@ public class RolesTest extends BaseApiTest{
     * Scenario 2
     * in this test we do the same as in @Test buildconfigurationTest() in BuildConfigurationTest. But in this test we set Role of User directly as "SYSTEM_ADMIN"
     * */
-    @Test
+    @Test(groups ={"api", "smoke", "regression"})
     public void systemAdminShouldHaveRightsToCreateProject() {
         /*
          * make changes according to changes in TestDataGenerator with adding method generateRoles and creation enum Role
@@ -80,7 +81,7 @@ public class RolesTest extends BaseApiTest{
     /*
     * Scenario 3 (positive)
     * */
-    @Test
+    @Test(groups ={"api", "smoke", "regression"})
     public void projectAdminShouldHaveRightToCreateBuildConfigToHisProject() {
         /*
          * make the same test like systemAdminTest but with role = PROJECT_ADMIN
@@ -117,7 +118,7 @@ public class RolesTest extends BaseApiTest{
      *
      * To implement this case we need to create Storage (TestDataStorage) where we will store collection of our test data and every time generate these test data again
      * */
-    @Test
+    @Test(groups ={"api", "smoke", "regression"})
     public void projectAdminShouldNotHaveRightsToCreateBuildConfigToAnotherProject() {
         var firstTestData = testDataStorage.addTestData();
         var secondTestData = testDataStorage.addTestData();
@@ -141,7 +142,7 @@ public class RolesTest extends BaseApiTest{
                 .then().assertThat().statusCode(HttpStatus.SC_FORBIDDEN);
     }
 
-    @Test
+    @Test(groups ={"api", "smoke", "regression"})
     public void projectAdminShouldHaveRightsToCreateProject() {
         var testData = testDataStorage.addTestData();
 
@@ -155,7 +156,7 @@ public class RolesTest extends BaseApiTest{
         softy.assertThat(project.getId()).isEqualTo(testData.getProject().getId());
     }
 
-    @Test
+    @Test(groups ={"api", "smoke", "regression"})
     public void projectDeveloperShouldNotHaveRightsToCreateProject() {
         var testData = testDataStorage.addTestData();
 
@@ -169,7 +170,7 @@ public class RolesTest extends BaseApiTest{
                 .body(Matchers.containsString("You do not have \"Create subproject\" permission in project with internal id: _Root\nAccess denied. Check the user has enough permissions to perform the operation"));
     }
 
-    @Test
+    @Test(groups ={"api", "regression"})
     public void projectDeveloperShouldNotHaveRightToCreateBuildConfigToHisProject() {
         var testData = testDataStorage.addTestData();
 
@@ -188,7 +189,7 @@ public class RolesTest extends BaseApiTest{
                 .body(Matchers.containsString("You do not have enough permissions to edit project with id: " + testData.getProject().getId()));
     }
 
-    @Test
+    @Test(groups ={"api", "smoke", "regression"})
     public void projectDeveloperShouldSeeBuildConfig() {
         var firstTestData = testDataStorage.addTestData();
         var secondTestData = testDataStorage.addTestData();
@@ -213,7 +214,7 @@ public class RolesTest extends BaseApiTest{
         softy.assertThat(buildConfig.getId()).isEqualTo(firstTestData.getBuildType().getId());
     }
 
-    @Test
+    @Test(groups ={"api", "smoke", "regression"})
     public void projectViewerShouldNotHaveRightsToCreateProject() {
         var testData = testDataStorage.addTestData();
 
@@ -227,7 +228,7 @@ public class RolesTest extends BaseApiTest{
                 .body(Matchers.containsString("You do not have \"Create subproject\" permission in project with internal id: _Root\nAccess denied. Check the user has enough permissions to perform the operation"));
     }
 
-    @Test
+    @Test(groups ={"api", "regression"})
     public void projectViewerShouldNotHaveRightToCreateBuildConfigToHisProject() {
         var testData = testDataStorage.addTestData();
 
@@ -246,7 +247,7 @@ public class RolesTest extends BaseApiTest{
                 .body(Matchers.containsString("You do not have enough permissions to edit project with id: " + testData.getProject().getId()));
     }
 
-    @Test
+    @Test(groups ={"api", "smoke", "regression"})
     public void projectViewerShouldSeeBuildConfig() {
         var firstTestData = testDataStorage.addTestData();
         var secondTestData = testDataStorage.addTestData();
@@ -271,7 +272,7 @@ public class RolesTest extends BaseApiTest{
         softy.assertThat(buildConfig.getId()).isEqualTo(firstTestData.getBuildType().getId());
     }
 
-    @Test
+    @Test(groups ={"api", "smoke", "regression"})
     public void agentManagerShouldNotHaveRightsToCreateProject() {
         var testData = testDataStorage.addTestData();
 
@@ -285,7 +286,7 @@ public class RolesTest extends BaseApiTest{
                 .body(Matchers.containsString("You do not have \"Create subproject\" permission in project with internal id: _Root\nAccess denied. Check the user has enough permissions to perform the operation"));
     }
 
-    @Test
+    @Test(groups ={"api", "regression"})
     public void agentManagerShouldNotHaveRightToCreateBuildConfigToHisProject() {
         var testData = testDataStorage.addTestData();
 
@@ -304,7 +305,7 @@ public class RolesTest extends BaseApiTest{
                 .body(Matchers.containsString("You do not have enough permissions to edit project with id: " + testData.getProject().getId()));
     }
 
-    @Test
+    @Test(groups ={"api", "smoke", "regression"})
     public void agentManagerShouldSeeBuildConfig() {
         var firstTestData = testDataStorage.addTestData();
         var secondTestData = testDataStorage.addTestData();

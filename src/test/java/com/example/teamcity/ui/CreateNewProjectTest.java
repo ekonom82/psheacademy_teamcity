@@ -7,7 +7,8 @@ import com.example.teamcity.ui.pages.admin.CreateNewProject;
 import org.testng.annotations.Test;
 
 public class CreateNewProjectTest extends BaseUiTest {
-    @Test
+
+    @Test(groups ={"ui", "smoke", "regression"})
     public void authorizedUserShouldBeAbleCreateNewProject() {
         var testData = testDataStorage.addTestData();
         // link to your repository necessary to fill textfield during creation new project
@@ -32,7 +33,7 @@ public class CreateNewProjectTest extends BaseUiTest {
                 .getHeader().shouldHave(Condition.text(testData.getProject().getName()));
     }
 
-    @Test
+    @Test(groups ={"ui", "smoke", "regression"})
     public void authorizedUserShouldNotBeAbleCreateNewProjectWithExistingName() {
         var testData = testDataStorage.addTestData();
         var url = Config.getProperty("urlRepo");

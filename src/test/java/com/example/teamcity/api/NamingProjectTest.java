@@ -9,7 +9,8 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 public class NamingProjectTest extends BaseApiTest{
-    @Test
+
+    @Test(groups ={"api", "smoke", "regression"})
     public void canNotBeCreatedProjectWithTheSameProjectId() {
         var testData = testDataStorage.addTestData();
 
@@ -24,7 +25,7 @@ public class NamingProjectTest extends BaseApiTest{
                 .body(Matchers.containsString("Project with this name already exists: " + testData.getProject().getName()));
     }
 
-    @Test
+    @Test(groups ={"api", "regression"})
     public void canNotBeCreatedProjectWithNameLonger255Characters() {
         int maxAllowedLength = 255;
         String randomAllowedName = RandomStringUtils.randomAlphabetic(maxAllowedLength);
