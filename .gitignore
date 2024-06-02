@@ -59,11 +59,11 @@ build/
 *.tar.gz
 *.rar
 
+# Project gen files
+.allure/
+target/allure-results/
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
 >>>>>>> f2612a7206a3aa40667326395d7a3305019e3b10
-
-# Project gen files
-.allure/
-allure-results/
