@@ -96,7 +96,7 @@ jobs:
       - name: Save Allure report history
         # Генерируем Allure отчёт и сохраняем историю отчётов.
         run: |
-          apt install default-jre-headless
+          apt install -y default-jre-headless 2 > /dev/null
           wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure_2.29.0-1_all.deb
           sudo dpkg -i allure_2.29.0-1_all.deb
           allure generate --clean
