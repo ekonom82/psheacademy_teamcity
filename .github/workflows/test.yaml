@@ -97,7 +97,7 @@ jobs:
         # Генерируем Allure отчёт и сохраняем историю отчётов.
         run: |
           wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure_2.29.0-1_all.deb
-          sudo dpkg -i allure_2.18.1-1_all.deb
+          sudo dpkg -i allure_2.29.0-1_all.deb
           allure generate --clean
           mkdir allure-report/history
           cp -r allure-results/* allure-report/history
