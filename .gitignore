@@ -63,3 +63,7 @@ build/
 hs_err_pid*
 replay_pid*
 >>>>>>> f2612a7206a3aa40667326395d7a3305019e3b10
+
+# Project gen files
+.allure/
+allure-results/
