@@ -92,3 +92,27 @@ jobs:
       - name: Run UI Regression tests
         # Указываем UI Regression
         run: ./mvnw test -DsuiteXmlFile=testng-suites/ui-regression-suite.xml
+
+      - name: Save Allure report history
+        # Генерируем Allure отчёт и сохраняем историю отчётов.
+        run: |
+          allure generate --clean
+          mkdir allure-report/history
+          cp -r allure-results/* allure-report/history
+
+      - name: Publish to gh-pages branch
+        # Создаем новую пустую ветку `gh-pages`, куда копируеем содержимое папки `allure-report`.
+        # Публикуем изменения в ветке `gh-pages` в репозитории.
+        run: |
+          git checkout --orphan gh-pages
+          git reset --hard
+          git clean -ffxd
+          mv allure-report/history/* .
+          git add .
+          git -c user.name='Andrey Dorokhin' -c user.email='ekonom82@inbox.ru' commit -m 'Publish Allure report'
+          git push -f origin gh-pages
+
+      - name: Cleanup
+        run: |
+          git checkout main
+          git branch -D gh-pages
