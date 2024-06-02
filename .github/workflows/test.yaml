@@ -93,6 +93,13 @@ jobs:
         # Указываем UI Regression
 #        run: ./mvnw test -DsuiteXmlFile=testng-suites/ui-regression-suite.xml
 
+      - name: Create empty gh-pages branch
+        run: |
+          git checkout --orphan gh-pages
+          git rm -rf .
+          git commit --allow-empty -m "Create empty gh-pages branch"
+          git push origin gh-pages
+
       - name: Load test report history # Step to retrieve Allure history
         uses: actions/checkout@v4
         # Execute even if previous steps fail
