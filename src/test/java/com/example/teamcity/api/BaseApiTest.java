@@ -1,6 +1,5 @@
 package com.example.teamcity.api;
 
-import com.example.teamcity.api.generators.TestDataStorage;
 import org.testng.annotations.BeforeTest;
 
 public class BaseApiTest extends BaseTest{
@@ -20,7 +19,7 @@ public class BaseApiTest extends BaseTest{
 //        testData.delete();
 //    }
 
-    public TestDataStorage testDataStorage;
+//    public TestDataStorage testDataStorage;
 
     /*
     * Due to we always have access to Supper User and always can work with it

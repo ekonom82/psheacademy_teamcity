@@ -22,7 +22,7 @@ public class BaseTest {
     public UncheckedRequests uncheckedWithSuperUser
             = new UncheckedRequests(Specifications.getSpec().superUserSpec());
 
-    @BeforeMethod
+//    @BeforeMethod
 //    public void setupTest() {
 //        testDataStorage = TestDataStorage.getStorage();
 //    }
