@@ -110,17 +110,24 @@ jobs:
           allure_history: allure-history
           allure_results: build/allure-results
 
-      - name: Publish to gh-pages branch
-        # Создаем новую пустую ветку `gh-pages`, куда копируеем содержимое папки `allure-report`.
-        # Публикуем изменения в ветке `gh-pages` в репозитории.
-        run: |
-          git checkout --orphan gh-pages
-          git reset --hard
-          git clean -ffxd
-          mv allure-report/history/* .
-          git add .
-          git -c user.name='ekonom82' -c user.email='ekonom82@inbox.ru' commit -m 'Publish Allure report'
-          git push -f origin gh-pages
+#      - name: Publish to gh-pages branch
+#        # Создаем новую пустую ветку `gh-pages`, куда копируеем содержимое папки `allure-report`.
+#        # Публикуем изменения в ветке `gh-pages` в репозитории.
+#        run: |
+#          git checkout --orphan gh-pages
+#          git reset --hard
+#          git clean -ffxd
+#          mv allure-report/history/* .
+#          git add .
+#          git -c user.name='ekonom82' -c user.email='ekonom82@inbox.ru' commit -m 'Publish Allure report'
+#          git push -f origin gh-pages
+      - name: Publish test report
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
 
       - name: Cleanup
         run: |
