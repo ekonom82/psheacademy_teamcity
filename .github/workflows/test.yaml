@@ -81,6 +81,9 @@ jobs:
         # Не указываем clean, чтобы потом в итоговом репорте были и setup тесты
         run: ./mvnw test -Dtest=SetupFirstStartTest#setupTeamCityAgentTest
 
+      - name: Run Checkstyle
+        run: mvn validate -Dcheckstyle.failOnViolation=true
+
       - name: Run API Smoke tests
         # Указываем группу, чтобы еще раз не запустить тесты, которые использовались для сетапа сервера и агента
         run: ./mvnw test -Dgroups=smoke
