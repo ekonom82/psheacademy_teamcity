@@ -107,18 +107,10 @@ jobs:
         with:
           gh_pages: gh-pages
           allure_history: allure-history
-          allure_results: build/allure-results
+          allure_results: allure-results
 
       - name: Publish test report
-#        uses: peaceiris/actions-gh-pages@v3
-        run: |
-          git checkout --orphan gh-pages
-          git reset --hard
-          git clean -ffxd
-          mv allure-report/history/* .
-          git add .
-          git -c user.name='ekonom82' -c user.email='ekonom82@inbox.ru' commit -m 'Publish Allure report'
-          git push -f origin gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GH_TOKEN }}
