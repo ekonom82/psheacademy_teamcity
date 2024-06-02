@@ -93,15 +93,14 @@ jobs:
         # Указываем UI Regression
 #        run: ./mvnw test -DsuiteXmlFile=testng-suites/ui-regression-suite.xml
 
-#      - name: Save Allure report history
-#        # Генерируем Allure отчёт и сохраняем историю отчётов.
-#        run: |
-#          apt install -y default-jre-headless 2 > /dev/null
-#          wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure_2.29.0-1_all.deb
-#          sudo dpkg -i allure_2.29.0-1_all.deb
-#          allure generate --clean
-#          mkdir allure-report/history
-#          cp -r allure-results/* allure-report/history
+      - name: Load test report history
+        uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
       - name: Build test report
         uses: simple-elf/allure-report-action@v1.7
         if: always()
@@ -110,17 +109,6 @@ jobs:
           allure_history: allure-history
           allure_results: build/allure-results
 
-#      - name: Publish to gh-pages branch
-#        # Создаем новую пустую ветку `gh-pages`, куда копируеем содержимое папки `allure-report`.
-#        # Публикуем изменения в ветке `gh-pages` в репозитории.
-#        run: |
-#          git checkout --orphan gh-pages
-#          git reset --hard
-#          git clean -ffxd
-#          mv allure-report/history/* .
-#          git add .
-#          git -c user.name='ekonom82' -c user.email='ekonom82@inbox.ru' commit -m 'Publish Allure report'
-#          git push -f origin gh-pages
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v3
         if: always()
