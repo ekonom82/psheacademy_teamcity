@@ -23,9 +23,9 @@ public class BaseTest {
             = new UncheckedRequests(Specifications.getSpec().superUserSpec());
 
     @BeforeMethod
-    public void setupTest() {
-        testDataStorage = TestDataStorage.getStorage();
-    }
+//    public void setupTest() {
+//        testDataStorage = TestDataStorage.getStorage();
+//    }
 
     @AfterMethod
     public void cleanTest() {
