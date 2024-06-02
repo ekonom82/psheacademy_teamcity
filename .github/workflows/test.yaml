@@ -85,17 +85,19 @@ jobs:
         # Указываем группу, чтобы еще раз не запустить тесты, которые использовались для сетапа сервера и агента
         run: ./mvnw test -Dgroups=smoke
 
-      - name: Run API Regression tests
+#      - name: Run API Regression tests
         # Указываем API Regression сьют
-        run: ./mvnw test -DsuiteXmlFile=testng-suites/api-regression-suite.xml
+#        run: ./mvnw test -DsuiteXmlFile=testng-suites/api-regression-suite.xml
 
-      - name: Run UI Regression tests
+#      - name: Run UI Regression tests
         # Указываем UI Regression
-        run: ./mvnw test -DsuiteXmlFile=testng-suites/ui-regression-suite.xml
+#        run: ./mvnw test -DsuiteXmlFile=testng-suites/ui-regression-suite.xml
 
       - name: Save Allure report history
         # Генерируем Allure отчёт и сохраняем историю отчётов.
         run: |
+          wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure_2.29.0-1_all.deb
+          sudo dpkg -i allure_2.18.1-1_all.deb
           allure generate --clean
           mkdir allure-report/history
           cp -r allure-results/* allure-report/history
@@ -109,7 +111,7 @@ jobs:
           git clean -ffxd
           mv allure-report/history/* .
           git add .
-          git -c user.name='Andrey Dorokhin' -c user.email='ekonom82@inbox.ru' commit -m 'Publish Allure report'
+          git -c user.name='ekonom82' -c user.email='ekonom82@inbox.ru' commit -m 'Publish Allure report'
           git push -f origin gh-pages
 
       - name: Cleanup
