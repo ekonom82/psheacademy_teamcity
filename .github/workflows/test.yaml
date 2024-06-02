@@ -93,51 +93,28 @@ jobs:
         # Указываем UI Regression
 #        run: ./mvnw test -DsuiteXmlFile=testng-suites/ui-regression-suite.xml
 
-      - name: Create empty gh-pages branch
-        run: |
-          git checkout --orphan gh-pages
-          git rm -rf .
-          git commit --allow-empty -m "Create empty gh-pages branch"
-          git push origin gh-pages
-
-      - name: Load test report history # Step to retrieve Allure history
+      - name: Get Allure history
         uses: actions/checkout@v4
-        # Execute even if previous steps fail
         if: always()
-        # Continue execution even if the step fails
         continue-on-error: true
         with:
-          # Specify the branch to retrieve Allure history from
           ref: gh-pages
-          # Set the destination path for Allure history
           path: gh-pages
 
-      - name: Build test report # Step to generate Allure report
-        uses: simple-elf/allure-report-action@v1.7
-        # Execute even if previous steps fail
+      - name: Allure report action from marketplace
+        uses: simple-elf/allure-report-action@master
         if: always()
+        id: allure-report
         with:
-#          gh_pages: gh-pages
-          # Specify the directory containing Allure results
+          allure_results: target/allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
           allure_history: allure-history
-          # Specify the directory to store Allure history
-          allure_results: allure-results
-          # Specify the number of previous reports to keep
-          keep_reports: 5
 
-      - name: Publish test report # Step to deploy Allure report to GitHub Pages
+      - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
-        # Execute even if previous steps fail
         if: always()
-        with:
-          # Provide the GitHub token for authentication
-          github_token: ${{ secrets.GH_TOKEN }}
-          # Specify the branch to publish the report to
-          publish_branch: gh-pages
-          # Specify the directory containing the report
-          publish_dir: allure-history
-
-#      - name: Cleanup
-#        run: |
-#          git checkout main
-#          git branch -D gh-pages
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GH_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
